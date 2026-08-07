@@ -43,6 +43,12 @@ cp .env.example .env
 
 `uv run --env-file .env` loads the dev environment explicitly — it is not auto-loaded.
 
+Console and file logs share a compact format:
+
+```
+2026-08-07 12:21:52 | INF | secondbrain.app | main | 62 | Hello from secondbrain!
+```
+
 ## Testing
 
 Run tests:
