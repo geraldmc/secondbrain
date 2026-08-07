@@ -1,0 +1,64 @@
+[build-system]
+requires = ["uv_build>=0.10.9,<0.11.0"]
+build-backend = "uv_build"
+
+[project]
+name = "secondbrain"
+version = "0.0.1"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "loguru>=0.7",
+]
+
+[project.scripts]
+secondbrain = "secondbrain.app:main"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11",
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
+    "pytest-env>=1.1",
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.6",
+    "mkdocstrings[python]>=0.27",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+]
+testpaths = ["tests"]
+
+[tool.pytest_env]
+env_files = [".env.test"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["src/*/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+exclude_also = [
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
